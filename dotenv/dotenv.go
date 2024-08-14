@@ -7,7 +7,6 @@ import (
 	"strings"
 )
 
-
 // Load files and handles parsing and env setting
 func Load(files ...string) error {
 	var envVars map[string]string
@@ -18,7 +17,7 @@ func Load(files ...string) error {
 	for i := 0; i < len(files); i++ {
 		envVars, err = parse(files[i])
 		if err != nil {
-			return err	
+			return err
 		}
 	}
 	return osEnvSetter(envVars)
@@ -45,7 +44,7 @@ func parse(filePath string) (map[string]string, error) {
 		}
 		key := strings.TrimSpace(keyValuePair[0])
 		value := strings.TrimSpace(keyValuePair[1])
-		if(len(key) == 0 || len(value) == 0){
+		if len(key) == 0 || len(value) == 0 {
 			return nil, fmt.Errorf("key or value not present, problem at %v", line)
 		}
 		envVars[key] = value
@@ -61,7 +60,7 @@ func osEnvSetter(envVars map[string]string) error {
 	for key, value := range envVars {
 		fmt.Printf("key is %s and value is %s \n", key, value)
 		err := os.Setenv(key, value)
-		if err!= nil {
+		if err != nil {
 			return err
 		}
 	}
