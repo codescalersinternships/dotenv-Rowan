@@ -63,7 +63,6 @@ func parse(filePath string) (map[string]string, error) {
 // osEnvSetter sets os environment variables
 func osEnvSetter(envVars map[string]string) error {
 	for key, value := range envVars {
-		fmt.Printf("key is %s and value is %s \n", key, value)
 		err := os.Setenv(key, value)
 		if err != nil {
 			return err
