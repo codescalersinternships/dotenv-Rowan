@@ -42,10 +42,15 @@ func parse(filePath string) (map[string]string, error) {
 		if len(keyValuePair) != 2 {
 			return nil, fmt.Errorf(".env file must have key=value only, problem at %v", line)
 		}
+
 		key := strings.TrimSpace(keyValuePair[0])
 		value := strings.TrimSpace(keyValuePair[1])
 		if len(key) == 0 || len(value) == 0 {
 			return nil, fmt.Errorf("key or value not present, problem at %v", line)
+		}
+		// export key=value
+		if len(key) > 6 && key[:6] == "export" {
+			key = key[6:]
 		}
 		envVars[key] = value
 	}
