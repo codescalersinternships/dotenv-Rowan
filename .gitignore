@@ -1,0 +1,4 @@
+.env
+cmd
+dotenv/.env
+dotenv/bad.env
